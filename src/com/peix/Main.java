@@ -50,14 +50,15 @@ public class Main {
                             break;
                         case 1:
                             add(pecesPecera.get(numeroDePeces).getImagen(), 0, elecciones.nextInt(getHeight() - 20));
-                            break; 
+                            break;
+
                         case 2:
                             add(pecesPecera.get(numeroDePeces).getImagen(), elecciones.nextInt(getWidth() - 40), 0);
                             break;
                         case 3:
                             add(pecesPecera.get(numeroDePeces).getImagen(), elecciones.nextInt(getWidth() - 40), getHeight() - 20);
                             break;
-                    }
+                    } System.out.println("hola");
                     System.out.println(pecesPecera.get(numeroDePeces).getSexo());
                     //pecesPecera.get(numeroDePeces).mover(pecesPecera.get(numeroDePeces).getDireccion(), pecesPecera.get(numeroDePeces).getImagen().getX(), pecesPecera.get(numeroDePeces).getImagen().getY());
                     pause(50);
