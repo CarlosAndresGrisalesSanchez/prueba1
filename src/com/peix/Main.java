@@ -50,7 +50,7 @@ public class Main {
                             break;
                         case 1:
                             add(pecesPecera.get(numeroDePeces).getImagen(), 0, elecciones.nextInt(getHeight() - 20));
-                            break;
+                            break; 
                         case 2:
                             add(pecesPecera.get(numeroDePeces).getImagen(), elecciones.nextInt(getWidth() - 40), 0);
                             break;
