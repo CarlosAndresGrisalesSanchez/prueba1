@@ -26,12 +26,12 @@ public class peces extends pez{
     }
 
     @Override
-    public void mover(String direccion, double x, double y) {
+    public void mover(String direccion, double x, double y,int movimiento) {
         switch (direccion){
-            case  "arriba":x=0;y=1;break;
-            case  "abajo": x=0;y=-1;break;
-            case  "izquierda":x=-1;y=0;break;
-            case  "derecha":x=1;y=0;break;
+            case  "arriba":x=0;y=-movimiento;break;
+            case  "abajo": x=0;y=movimiento;break;
+            case  "izquierda":x=-movimiento;y=0;break;
+            case  "derecha":x=movimiento;y=0;break;
         }
         this.imagen.move(x,y);
     }

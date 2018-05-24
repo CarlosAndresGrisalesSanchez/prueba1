@@ -11,5 +11,5 @@ public interface animal {
     public String getDireccion() ;
     public String getSexo() ;
     public String getEspecie() ;
-    public void mover(String direccion,double x,double y);
+    public void mover(String direccion,double x,double y,int movimiento);
 }

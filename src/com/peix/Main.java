@@ -21,24 +21,27 @@ public class Main {
 
 
             while (true){
-                if (noEliminado&&numeroDePeces<15) {
+                if (!noEliminado|numeroDePeces<15) {
                     switch (elecciones.nextInt(4)) {
                         case 0:
                             pecesPecera.add(new tiburon());
+                            pecesPecera.get(numeroDePeces).setEspecie("tiburon");
                             break;
                         case 1:
                             pecesPecera.add(new tiburon());
                             pecesPecera.get(numeroDePeces).setImagen(new GImage("tiburonHembra.png"));
-                            pecesPecera.get(numeroDePeces).setSexo("Hembra");
-                            ;
+                            pecesPecera.get(numeroDePeces).setSexo("hembra");
+                            pecesPecera.get(numeroDePeces).setEspecie("tiburon");
                             break;
                         case 2:
                             pecesPecera.add(new peces());
+                            pecesPecera.get(numeroDePeces).setEspecie("pez");
                             break;
                         case 3:
-                            pecesPecera.add(new tiburon());
+                            pecesPecera.add(new peces());
                             pecesPecera.get(numeroDePeces).setImagen(new GImage("pezHembra.png"));
-                            pecesPecera.get(numeroDePeces).setSexo("Hembra");
+                            pecesPecera.get(numeroDePeces).setSexo("hembra");
+                            pecesPecera.get(numeroDePeces).setEspecie("pez");
                             break;
 
                     }
@@ -58,56 +61,61 @@ public class Main {
                         case 3:
                             add(pecesPecera.get(numeroDePeces).getImagen(), elecciones.nextInt(getWidth() - 40), getHeight() - 20);
                             break;
-                    } System.out.println("hola");
+                    }
                     System.out.println(pecesPecera.get(numeroDePeces).getSexo());
                     //pecesPecera.get(numeroDePeces).mover(pecesPecera.get(numeroDePeces).getDireccion(), pecesPecera.get(numeroDePeces).getImagen().getX(), pecesPecera.get(numeroDePeces).getImagen().getY());
-                    pause(50);
+                    pause(5);
                     System.out.println(numeroDePeces);
+                    noEliminado=true;
                 }
                 for (int i=0;i<pecesPecera.size();i++) {
-                    pecesPecera.get(i).mover(pecesPecera.get(i).getDireccion(),pecesPecera.get(i).getImagen().getX(),pecesPecera.get(i).getImagen().getY());
-                        /*switch (pecesPecera.get(i).getDireccion()){
+                    if (noEliminado) {
+                    pecesPecera.get(i).mover(pecesPecera.get(i).getDireccion(),pecesPecera.get(i).getImagen().getX(),pecesPecera.get(i).getImagen().getY(),elecciones.nextInt(4)+1);
+                        switch (pecesPecera.get(i).getDireccion()){
                             case "arriba":
-                                if (pecesPecera.get(i).getImagen().getY()<=-(pecesPecera.get(i).getImagen().getHeight())){
+                                if (pecesPecera.get(i).getImagen().getY()<-pecesPecera.get(i).getImagen().getHeight()){
                                             double x=pecesPecera.get(i).getImagen().getX();
                                             remove(pecesPecera.get(i).getImagen());
-                                            pecesPecera.remove(pecesPecera.get(i));;
-
+                                            add(pecesPecera.get(i).getImagen(),x,getGCanvas().getHeight());
                                           }break;
                             case "abajo":
-                                System.out.println("ab");
-                                if (pecesPecera.get(i).getImagen().getY()>=900) {
+
+                                if (pecesPecera.get(i).getImagen().getY()>getGCanvas().getHeight()) {
                                                 double x = pecesPecera.get(i).getImagen().getX();
                                                 remove(pecesPecera.get(i).getImagen());
-                                                pecesPecera.remove(pecesPecera.get(i));
-                                                noEliminado=false;
-                                                numeroDePeces--;
+                                                add(pecesPecera.get(i).getImagen(),x,-pecesPecera.get(i).getImagen().getHeight());
                                             }break;
                             case "derecha":
-                                System.out.println("d");
-                                if (pecesPecera.get(i).getImagen().getX()<=-pecesPecera.get(i).getImagen().getWidth()) {
-                                                double x = pecesPecera.get(i).getImagen().getX();
+                                if (pecesPecera.get(i).getImagen().getX()>getGCanvas().getWidth()) {
+                                    double y = pecesPecera.get(i).getImagen().getY();
                                                 remove(pecesPecera.get(i).getImagen());
-                                                pecesPecera.remove(pecesPecera.get(i));
+                                                add(pecesPecera.get(i).getImagen(),-pecesPecera.get(i).getImagen().getWidth(),y);
                                             }break;
 
                             case "izquierda":
-                                System.out.println("i");
-                                            if (pecesPecera.get(i).getImagen().getX()>=getGCanvas().getHeight()+pecesPecera.get(i).getImagen().getWidth()) {
-                                                double x = pecesPecera.get(i).getImagen().getX();
+                                            if (pecesPecera.get(i).getImagen().getX()<-pecesPecera.get(i).getImagen().getWidth()) {
+                                                double y = pecesPecera.get(i).getImagen().getY();
                                                 remove(pecesPecera.get(i).getImagen());
-                                                pecesPecera.remove(pecesPecera.get(i));
+                                                add(pecesPecera.get(i).getImagen(),getGCanvas().getWidth(),y);
                                             }break;
-                        }*/
+                        }
+
                     pause(5);
-                        if (noEliminado) {
                             for (int j = 0; j < pecesPecera.size(); j++) {
+
                                 if (!(i == j)) {
-                                    System.out.println(pecesPecera.get(i).getImagen().getBounds().intersects(pecesPecera.get(j).getImagen().getBounds()));
+                                   if(pecesPecera.get(i).getImagen().getBounds().intersects(pecesPecera.get(j).getImagen().getBounds())){
+                                       remove(pecesPecera.get(i).getImagen());
+                                       //pecesPecera.remove(pecesPecera.get(i));
+                                       //remove(pecesPecera.get(j).getImagen());
+                                       //if (i>j){pecesPecera.remove(pecesPecera.get(j));}//else {pecesPecera.get(j-1);};
+                                       System.out.println(pecesPecera.get(i).getEspecie()+" "+pecesPecera.get(j).getEspecie());
+                                   };
                                 }
                             }
                         }
                 }
+
 
 
                 if (noEliminado){if (numeroDePeces<15) numeroDePeces++;}
